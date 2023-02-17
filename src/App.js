@@ -1,24 +1,27 @@
 import logo from './logo.svg';
 import './App.css';
-
+import Navbar from './Components/Navbar/Navbar';
+import {BrowserRouter as Router,Routes,Switch,Route,Link} from "react-router-dom";
+import Login from './Components/Login/Login';
+import Market from './Components/Market/Market';
+import Rent from './Components/Rent/Rent';
+import SignUp from './Components/SignUp/SignUp';
+import Home from './Components/Home/Home';
+import DataContext from './Components/Context/DataContext';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DataContext>
+    <Router>
+    <Navbar/>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/market" element={<Market/>}/>
+        <Route path="/rent" element={<Rent/>}/>
+        <Route path="/signup" element={<SignUp/>}/>
+      </Routes>
+    </Router>
+    </DataContext>
   );
 }
 
