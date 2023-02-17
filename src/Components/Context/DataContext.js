@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import MainContext from "./MainContext.js";
+import axios from 'axios';
 export default function DataContext(props) {
   const [Data, setData] = useState([
     {
@@ -51,8 +52,40 @@ export default function DataContext(props) {
       rent: 1245,
     },
   ]);
-  return (
-    <MainContext.Provider value={{Data,setData}}>
+  const[user,setUser] = useState({})
+  const register= async ()=>{
+    try{
+      const res=await axios.post('http://localhost:8000/createuser',user)
+    console.log("Successfully Signed Up")
+  }
+  catch(error)
+  {
+    console.log(error.response.data)
+  }
+}
+  const allData= async ()=>{
+  try{
+    const res = await axios.get("http://localhost:8000/find")
+    console.log(res.data)
+  }
+  catch(error)
+  {
+    console.log(error.response.data)
+  }      
+  }
+  const login= async ()=>{
+    try{
+    const res= await axios.post("http://localhost:8000/login",user)
+    console.log("You have successfullly logged in")
+  }
+  catch(error)
+  {
+    console.log(error.response.data)
+  }
+
+  } 
+   return (
+    <MainContext.Provider value={{Data,setData,user,setUser,register,allData,login}}>
     {props.children}
     </MainContext.Provider>  
     );

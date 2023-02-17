@@ -1,28 +1,35 @@
-import React from 'react'
-
+import React, { useState, useEffect, useContext } from 'react';
+import MainContext from '../Context/MainContext';
 export default function SignUp(props) {
-
+  const [alert,setAlert]=useState('hidden')
+  const a= useContext(MainContext)
   const click=()=>{
-    const object=[
-      ...props.card,
+    const object=
       {
         firstname: document.getElementById('firstname').value,
         lastname: document.getElementById('lastname').value,
         email: document.getElementById('mail').value,
         date: document.getElementById('dob').value,
-        phone: document.getElementById('phone').value,
-        key: document.getElementById('firstname').value+document.getElementById('phone').value,
         address: document.getElementById('address').value,
-        city: document.getElementById('city').value,
-        zipcode: document.getElementById('zipcode').value,
-        state: document.getElementById('state').value,
-        country: document.getElementById('country').value,
+        contact: document.getElementById('phone').value,
         password: document.getElementById('password').value,
-        confirmpassword: document.getElementById('cpassword').value
-    }]
-    props.setCard(object)
+    }
+    const cpass= document.getElementById('cpassword').value
+    if(cpass===object.password)
+    {
+      setAlert('hidden')
+      a.setUser(object)
+    }
+    else{
+      setAlert('visible')
+    }
   }
+  useEffect(()=>{
+    // console.log(a.user)
+    a.register()
+  },[a.user])
   return (
+    <>
     <div className="container h-50 w-50 p-4 shadow mb-4 bg-body-tertiary rounded">
     <h3 className="text-center mb-4"><b>REGISTRATION</b></h3>
     <div className="input-group mb-3">
@@ -44,18 +51,6 @@ export default function SignUp(props) {
   <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" id="address"/>
 </div>
 <div className="input-group mb-3">
-  <span className="input-group-text" id="inputGroup-sizing-default" style={{backgroundColor:'#adb5bd'}}>City</span>
-  <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="city"/>
-  <span className="input-group-text" id="inputGroup-sizing-default" style={{backgroundColor:'#adb5bd'}}>Zipcode</span>
-  <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="zipcode"/>
-</div>
-<div className="input-group mb-3">
-  <span className="input-group-text" id="inputGroup-sizing-default" style={{backgroundColor:'rgb(211 195 23)'}}>State</span>
-  <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="state"/>
-  <span className="input-group-text" id="inputGroup-sizing-default" style={{backgroundColor:'rgb(211 195 23)'}}>Country</span>
-  <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="country"/>
-</div>
-<div className="input-group mb-3">
   <span className="input-group-text" id="inputGroup-sizing-default" style={{backgroundColor:'#adb5bd'}}>Contact No.</span>
   <input type="tel" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="eg:- +91 9999999999" id="phone"/>
 </div>
@@ -65,9 +60,11 @@ export default function SignUp(props) {
   <span className="input-group-text" id="inputGroup-sizing-default" style={{backgroundColor:'rgb(211 195 23)'}}>Confirm Password</span>
   <input type="password" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="cpassword"/>
 </div>
+<p id="err" style={{visibility:`${alert}`}}>Passwords don't match</p>
 <div className="text-center mt-5">
 <button type="submit" className="btn btn-dark mx-5" onClick={click}>Submit</button>
 </div>
 </div>
+</>
 );
 }
