@@ -6,7 +6,7 @@ export default function (props) {
     <div className="col">
       <div className="card mx-2 shadow" style={{borderRadius:"10%"}}>
         <img
-          src={pic}
+          src={props.item.images[0].url}
           style={{
             width: "100%",
             height: "5%",
@@ -16,13 +16,14 @@ export default function (props) {
           }}
         />
         <div className="card-body">
-          <h5 className="card-title">{props.item.title}</h5>
+          <h5 className="card-title">{props.item.name}</h5>
+          <p>{props.item.articleColorNames.brandName}</p>
           <p></p>
         </div>
         <div className="d-flex">
           <div>
             <button class="btn btn-outline-success my-2" type="submit">
-              Buy
+              Buy &nbsp {props.item.price.formattedValue}
             </button>
           </div>
           <div className="mx-2">

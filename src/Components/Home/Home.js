@@ -1,7 +1,7 @@
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import Test from './Test';
-// export default function Home() {
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Test from './Test';
+export default function Home() {
 //   const postdata= async ()=>{
 //     try{
 //       const res=await axios.post('http://localhost:8000/createuser',{
@@ -31,7 +31,7 @@
 //     postdata()
 //     // data()
 //   },[])
-//   return (
-//     <div>dance</div>
-//   )
-// }
+  return (
+    <div>dance</div>
+  )
+}

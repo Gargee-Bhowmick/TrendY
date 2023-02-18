@@ -9,12 +9,13 @@ export default function Login() {
     }
     console.log(obj)
     a.setUser(obj)
-    // a.login()
   }
   useEffect(()=>{
         a.login();
    },[a.user])
   return (
+    <>
+    {a.alert &&<div className={`alert alert-${a.alert.color}`} role="alert">{a.alert.msg}</div>}
     <div className="container h-50 w-50 p-4 shadow mb-4 bg-body-tertiary rounded mt-5">
     <h3 className="text-center mb-4"><b>LOGIN</b></h3>
     <div className="input-group mb-3">
@@ -28,6 +29,7 @@ export default function Login() {
 <div className="text-center mt-5">
 <button type="submit" className="btn btn-dark mx-5" onClick={change}>Login</button>
 </div>
-   </div>
+  </div>
+  </>
   )
 }

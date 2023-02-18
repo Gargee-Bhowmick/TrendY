@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import MainContext from '../Context/MainContext';
 export default function SignUp(props) {
-  const [alert,setAlert]=useState('hidden')
   const a= useContext(MainContext)
   const click=()=>{
     const object=
@@ -17,11 +16,18 @@ export default function SignUp(props) {
     const cpass= document.getElementById('cpassword').value
     if(cpass===object.password)
     {
-      setAlert('hidden')
       a.setUser(object)
     }
     else{
-      setAlert('visible')
+      a.setAlert({
+        msg: "Password entered doesn't match with confirm password",
+        color: "danger"
+      })
+      setTimeout(()=>{
+        a.setAlert({
+          msg: null,
+          color: null
+        })},3000)
     }
   }
   useEffect(()=>{
@@ -30,6 +36,7 @@ export default function SignUp(props) {
   },[a.user])
   return (
     <>
+    {a.alert &&<div className={`alert alert-${a.alert.color}`} role="alert">{a.alert.msg}</div>}
     <div className="container h-50 w-50 p-4 shadow mb-4 bg-body-tertiary rounded">
     <h3 className="text-center mb-4"><b>REGISTRATION</b></h3>
     <div className="input-group mb-3">
@@ -60,7 +67,6 @@ export default function SignUp(props) {
   <span className="input-group-text" id="inputGroup-sizing-default" style={{backgroundColor:'rgb(211 195 23)'}}>Confirm Password</span>
   <input type="password" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" id="cpassword"/>
 </div>
-<p id="err" style={{visibility:`${alert}`}}>Passwords don't match</p>
 <div className="text-center mt-5">
 <button type="submit" className="btn btn-dark mx-5" onClick={click}>Submit</button>
 </div>

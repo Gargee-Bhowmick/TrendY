@@ -20,6 +20,9 @@ export default function Navbar() {
         <Link className="nav-link active" to="/login">
         <button className="btn btn-outline-success my-2" type="submit">Login</button>
         </Link>
+        <Link className="nav-link active" to="/profile">
+        <button className="btn btn-outline-success my-2" type="submit">Profile</button>
+        </Link>
         </div>
         </div>
       </div>
